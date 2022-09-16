@@ -5,6 +5,8 @@ function sumString(Str)
     {
         return TotalValue;
     }
+    TotalValue=parseInt(Str[0]);
+    return TotalValue;
 }
 
 export default sumString
