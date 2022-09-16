@@ -5,10 +5,19 @@ function sumString(Str)
     let NumberStr=""
     while(StrArray.length>0)
     {
-        NumberStr+=StrArray.shift();
+        while(StrArray.length>0)
+        {
+            let characterExtracted=StrArray.shift();
+            if(characterExtracted==",")
+            {
+                break;
+            }
+            NumberStr+=characterExtracted;
+        }
+        TotalValue+=parseInt(NumberStr);
+        NumberStr=""
     }
-    if(NumberStr!="")
-        TotalValue=parseInt(NumberStr);
+    
     return TotalValue;
 }
 
