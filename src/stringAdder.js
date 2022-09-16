@@ -1,11 +1,14 @@
 function sumString(Str)
 {
+    let StrArray=Str.split("");
     let TotalValue=0;
-    if(Str.length==0)
+    let NumberStr=""
+    while(StrArray.length>0)
     {
-        return TotalValue;
+        NumberStr+=StrArray.shift();
     }
-    TotalValue=parseInt(Str[0]);
+    if(NumberStr!="")
+        TotalValue=parseInt(NumberStr);
     return TotalValue;
 }
 
