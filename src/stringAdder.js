@@ -1,3 +1,4 @@
+const Separators=new Set([",","-"])
 function sumString(Str)
 {
     let StrArray=Str.split("");
@@ -8,7 +9,7 @@ function sumString(Str)
         while(StrArray.length>0)
         {
             let characterExtracted=StrArray.shift();
-            if(characterExtracted==",")
+            if(Separators.has(characterExtracted))
             {
                 break;
             }
