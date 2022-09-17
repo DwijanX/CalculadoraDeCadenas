@@ -1,15 +1,18 @@
 const Separators=new Set([",","-"])
-function getSeparatorsOutOfStr(Str)
+function getCustomSeparatorsOutOfStr(Str)
 {
     const SeparatorExp =/\[(.*?)\]/g
-    let NewSeparator=Str.match(SeparatorExp)[0]
-    NewSeparator=NewSeparator.substring(1,NewSeparator.length-1)
-    Separators.add(NewSeparator);
-    let EndOfSeparatorsIndex=Str.search(/\n/g)
-    return Str.substr(EndOfSeparatorsIndex+2)
+    let NewSeparatorsArray=Str.match(SeparatorExp)
+
+    NewSeparatorsArray.forEach((NewSeparator)=>{
+        NewSeparator=NewSeparator.substring(1,NewSeparator.length-1)
+        Separators.add(NewSeparator);
+    })
+    let EndOfCustomSeparatorsIndex=Str.search(/\n/g)
+    return Str.substr(EndOfCustomSeparatorsIndex+2)
 }
 
-function verifyIfTheresASeparator(StrArray)
+function verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
 {
     let PossibleSeparator="";
     while(StrArray.length>0)
@@ -27,7 +30,7 @@ function verifyIfTheresASeparator(StrArray)
 function sumString(Str)
 {
     if(Str[0]=="/")
-        Str=getSeparatorsOutOfStr(Str)
+        Str=getCustomSeparatorsOutOfStr(Str)
     let StrArray=Str.split("");
     let TotalValue=0;
     let NumberStr=""
@@ -35,11 +38,9 @@ function sumString(Str)
     {
         while(StrArray.length>0)
         {
-            if(verifyIfTheresASeparator(StrArray,0))
+            if(verifyIfTheresASeparatorAndDeleteItFromArray(StrArray,0))
                 break;
-            let characterExtracted=StrArray.shift()
-            if(isNaN(characterExtracted)==false)
-                NumberStr+=characterExtracted;
+            NumberStr+=StrArray.shift();
         }
         TotalValue+=parseInt(NumberStr);
         NumberStr=""

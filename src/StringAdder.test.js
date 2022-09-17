@@ -37,4 +37,7 @@ describe("SumString", () => {
   it("Deberia devolver 45 cuando se ingresa los numeros 9,20 y 16 separados por un separador especial de longitud mayor a 1 y un separador ya conocido", () => {
     expect(sumString("//[;;]\n 9;;20,16")).toEqual(45);
   });
+  it("Deberia devolver 300 cuando se ingresa los numeros 4,10 y 16 separados por varios separadores especiales", () => {
+    expect(sumString("//[;;][`][!]\n 10;;100;;160`20!10")).toEqual(300);
+  });
 });
