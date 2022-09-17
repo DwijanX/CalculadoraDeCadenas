@@ -40,4 +40,10 @@ describe("SumString", () => {
   it("Deberia devolver 300 cuando se ingresa los numeros 4,10 y 16 separados por varios separadores especiales", () => {
     expect(sumString("//[;;][`][!]\n 10;;100;;160`20!10")).toEqual(300);
   });
+  it("Deberia devolver 0 cuando se ingresa el numero 1001", () => {
+    expect(sumString("1001")).toEqual(0);
+  });
+  it("Deberia devolver 1500 cuando se ingresa los numeros 1000,500,1001 ", () => {
+    expect(sumString("//[***]\n 1000***500***1001")).toEqual(1500);
+  });
 });

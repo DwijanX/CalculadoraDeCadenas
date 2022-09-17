@@ -42,7 +42,9 @@ function sumString(Str)
                 break;
             NumberStr+=StrArray.shift();
         }
-        TotalValue+=parseInt(NumberStr);
+        let RetrievedNumber=parseInt(NumberStr)
+        if(RetrievedNumber<=1000)
+            TotalValue+=RetrievedNumber;
         NumberStr=""
     }
     
