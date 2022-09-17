@@ -5,12 +5,25 @@ function getSeparatorsOutOfStr(Str)
     let NewSeparator=Str.match(SeparatorExp)[0]
     NewSeparator=NewSeparator.substring(1,NewSeparator.length-1)
     Separators.add(NewSeparator);
-    
     let EndOfSeparatorsIndex=Str.search(/\n/g)
     return Str.substr(EndOfSeparatorsIndex+2)
-
 }
 
+function verifyIfTheresASeparator(StrArray)
+{
+    let PossibleSeparator="";
+    while(StrArray.length>0)
+    {
+        if(isNaN(StrArray[0]))
+            PossibleSeparator+=StrArray.shift()
+        else
+            break;
+    }
+    if(Separators.has(PossibleSeparator))
+        return true
+    else
+        return false
+}
 function sumString(Str)
 {
     if(Str[0]=="/")
@@ -20,15 +33,13 @@ function sumString(Str)
     let NumberStr=""
     while(StrArray.length>0)
     {
-        if(StrArray)
         while(StrArray.length>0)
         {
-            let characterExtracted=StrArray.shift();
-            if(Separators.has(characterExtracted))
-            {
+            if(verifyIfTheresASeparator(StrArray,0))
                 break;
-            }
-            NumberStr+=characterExtracted;
+            let characterExtracted=StrArray.shift()
+            if(isNaN(characterExtracted)==false)
+                NumberStr+=characterExtracted;
         }
         TotalValue+=parseInt(NumberStr);
         NumberStr=""
