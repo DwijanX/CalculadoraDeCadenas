@@ -1,6 +1,6 @@
 import stringCalculator from "./stringAdder.js";
 
-describe("strcalc.getSumFrom", () => {
+describe("Calcular suma de una cadena", () => {
   let strcalc;
   beforeEach(()=>{
     strcalc = new stringCalculator();

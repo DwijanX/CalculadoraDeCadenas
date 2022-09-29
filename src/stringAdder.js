@@ -1,5 +1,4 @@
 class stringCalculator{
-
 constructor(){
 this.Separators=new Set([",","-"]);
 }
@@ -16,8 +15,14 @@ extractCustomSeparatorFrom(userString)
     let EndOfCustomSeparatorsIndex=userString.search(/\n/g)
     return userString.substr(EndOfCustomSeparatorsIndex+2)
 }
-
-verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
+checkIfSeparatorIsValid(PossibleSeparator)
+{
+    if(this.Separators.has(PossibleSeparator))
+        return true
+    else
+        return false
+}
+extractNextSeparatorFrom(StrArray)
 {
     let PossibleSeparator="";
     while(StrArray.length>0)
@@ -27,16 +32,16 @@ verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
         else
             break;
     }
-    if(this.Separators.has(PossibleSeparator))
-        return true
-    else
-        return false
+    return PossibleSeparator
+    
 }
 extractNumberUntilSeparator(StrArray){
     let NumberStr=""
+    let PossibleSeparator;
     while(StrArray.length>0)
     {
-        if(this.verifyIfTheresASeparatorAndDeleteItFromArray(StrArray))
+        PossibleSeparator=this.extractNextSeparatorFrom(StrArray)
+        if(this.checkIfSeparatorIsValid(PossibleSeparator))
             break;
         NumberStr+=StrArray.shift();
     }
@@ -58,17 +63,5 @@ getSumFrom(userString)
     
     return TotalValue;
 }
-
-
-
-
-
-
-
 }
-
-
-
-
-
 export default stringCalculator;
