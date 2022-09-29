@@ -1,18 +1,23 @@
-const Separators=new Set([",","-"])
-function getCustomSeparatorsOutOfStr(Str)
+class stringCalculator{
+
+constructor(){
+this.Separators=new Set([",","-"]);
+}
+
+extractCustomSeparatorFrom(userString)
 {
     const SeparatorExp =/\[(.*?)\]/g
-    let NewSeparatorsArray=Str.match(SeparatorExp)
+    let NewSeparatorsArray=userString.match(SeparatorExp)
 
     NewSeparatorsArray.forEach((NewSeparator)=>{
         NewSeparator=NewSeparator.substring(1,NewSeparator.length-1)
-        Separators.add(NewSeparator);
+        this.Separators.add(NewSeparator);
     })
-    let EndOfCustomSeparatorsIndex=Str.search(/\n/g)
-    return Str.substr(EndOfCustomSeparatorsIndex+2)
+    let EndOfCustomSeparatorsIndex=userString.search(/\n/g)
+    return userString.substr(EndOfCustomSeparatorsIndex+2)
 }
 
-function verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
+verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
 {
     let PossibleSeparator="";
     while(StrArray.length>0)
@@ -22,23 +27,25 @@ function verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
         else
             break;
     }
-    if(Separators.has(PossibleSeparator))
+    if(this.Separators.has(PossibleSeparator))
         return true
     else
         return false
 }
-function sumString(Str)
+
+
+getSumFrom(userString)
 {
-    if(Str[0]=="/")
-        Str=getCustomSeparatorsOutOfStr(Str)
-    let StrArray=Str.split("");
+    if(userString[0]=="/")
+        userString=this.extractCustomSeparatorFrom(userString)
+    let StrArray=userString.split("");
     let TotalValue=0;
     let NumberStr=""
     while(StrArray.length>0)
     {
         while(StrArray.length>0)
         {
-            if(verifyIfTheresASeparatorAndDeleteItFromArray(StrArray,0))
+            if(this.verifyIfTheresASeparatorAndDeleteItFromArray(StrArray))
                 break;
             NumberStr+=StrArray.shift();
         }
@@ -51,4 +58,16 @@ function sumString(Str)
     return TotalValue;
 }
 
-export default sumString
+
+
+
+
+
+
+}
+
+
+
+
+
+export default stringCalculator;
