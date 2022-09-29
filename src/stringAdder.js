@@ -32,7 +32,16 @@ verifyIfTheresASeparatorAndDeleteItFromArray(StrArray)
     else
         return false
 }
-
+extractNumberUntilSeparator(StrArray){
+    let NumberStr=""
+    while(StrArray.length>0)
+    {
+        if(this.verifyIfTheresASeparatorAndDeleteItFromArray(StrArray))
+            break;
+        NumberStr+=StrArray.shift();
+    }
+    return parseInt(NumberStr)
+}
 
 getSumFrom(userString)
 {
@@ -40,19 +49,11 @@ getSumFrom(userString)
         userString=this.extractCustomSeparatorFrom(userString)
     let StrArray=userString.split("");
     let TotalValue=0;
-    let NumberStr=""
     while(StrArray.length>0)
     {
-        while(StrArray.length>0)
-        {
-            if(this.verifyIfTheresASeparatorAndDeleteItFromArray(StrArray))
-                break;
-            NumberStr+=StrArray.shift();
-        }
-        let RetrievedNumber=parseInt(NumberStr)
+        let RetrievedNumber=this.extractNumberUntilSeparator(StrArray)
         if(RetrievedNumber<=1000)
             TotalValue+=RetrievedNumber;
-        NumberStr=""
     }
     
     return TotalValue;
